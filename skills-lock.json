@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "skills": {
+    "literature-review": {
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/literature-review/SKILL.md",
+      "computedHash": "6f47f815fa034147a5f2c8971d33266260397cc2bef73e9c3a0cabaf36caa084"
+    },
+    "scientific-critical-thinking": {
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/scientific-critical-thinking/SKILL.md",
+      "computedHash": "da747066d8295c06095d3a901bf6a2afbad2e6491526989262098367da63f944"
+    }
+  }
+}
