@@ -1,7 +1,7 @@
 ---
 type: index
 created: 2026-09-12
-updated: 2026-09-20
+updated: 2026-09-21
 status: reviewed
 tags: [navigation]
 ---
@@ -70,7 +70,7 @@ tags: [navigation]
 
 ## 운영
 
-- [사용 안내](../README.md) — 폴더 구조와 대화 예시.
+- [사용 안내](../README.md) — 폴더 구조, 대화 예시와 다른 PC에서의 클론·에이전트 환경 복원 절차.
 - [운영 지침](../AGENTS.md) — 원본 보존, 자료 반영, 검색, 기록과 점검 규칙.
 - [위키 에이전트 지침](AGENTS.md) — 폴더·파일별 작성과 수정, 최신순 추가 전용 로그 규칙.
 - [원본 에이전트 지침](../raw/AGENTS.md) — 자료별 보관 방식, 파일 설명과 원본 보존 규칙.
