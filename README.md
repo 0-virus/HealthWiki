@@ -29,12 +29,13 @@ git ls-files --others --ignored --exclude-standard --directory
 git rev-parse HEAD
 ```
 
-변경·미추적 파일 중 옮길 위키, 원본, 첨부, 스킬을 검토해 커밋하고 원격에 push합니다. 마지막 명령의 커밋 ID를 적어 두면 새 PC와 비교할 수 있습니다. 개인 건강 기록과 영상도 포함되므로 원격 저장소의 공개 범위와 접근 권한을 확인합니다.
+변경·미추적 파일 중 옮길 위키, 원본, 사진, 스킬을 검토해 커밋하고 원격에 push합니다. 클라이밍 영상은 Git에서 제외하므로 별도 백업하고 새 PC의 같은 상대 경로로 복원합니다. 마지막 명령의 커밋 ID를 적어 두면 새 PC와 비교할 수 있습니다. 개인 건강 기록이 포함되므로 원격 저장소의 공개 범위와 접근 권한을 확인합니다.
 
 | 항목 | 클론 포함 여부와 필요한 조치 |
 | --- | --- |
-| `AGENTS.md`, `wiki/`, `raw/`, `templates/` | Git에 추적된 파일은 포함. 현재 클라이밍 영상도 일반 Git 파일로 추적되며 Git LFS 설정은 없음 |
-| `.agents/skills/`, `skills-lock.json` | 프로젝트 스킬 7개와 참고 문서·스크립트가 포함. 별도 재설치 없이 사용하며, 동일 구성 복원 중에는 최신판으로 덮어쓰지 않음 |
+| `AGENTS.md`, `wiki/`, `raw/`, `templates/` | Git에 추적된 문서·사진은 포함. 클라이밍 영상은 `.gitignore`로 추적 제외하며 Git LFS도 사용하지 않음 |
+| `wiki/workouts/climbing/`의 영상, `analysis-videos/` | 최신 커밋의 파일 복원 대상에서 제외. 로컬 파일을 별도 백업해 같은 상대 경로로 복원. 이미 추적했던 영상은 추적만 해제하므로 과거 커밋에는 남아 있음 |
+| `.agents/skills/`, `skills-lock.json` | 프로젝트 스킬 8개와 참고 문서·스크립트가 포함. 별도 재설치 없이 사용하며, 동일 구성 복원 중에는 최신판으로 덮어쓰지 않음 |
 | `package.json`, `package-lock.json` | 포함. `node_modules/`는 제외되므로 아래의 `npm ci`로 복원 |
 | `.env`, `.env.*`, `.venv/` | 제외(`.env.example`은 제외 규칙의 예외이나 현재 파일은 없음). 필요한 환경 변수는 새 PC에서 설정하고 Python 환경은 재생성 |
 | 에이전트 앱·모델 설정·전역 스킬·플러그인·외부 도구 연결·로그인 | 저장소에 포함되지 않음. 사용하는 앱에서 별도 설치·설정·재인증 |
@@ -112,9 +113,9 @@ macOS·Linux에서는 `python3 -m venv .venv`와 `.venv/bin/python`을 사용합
 
 ### 5. 복원 완료 확인과 이후 동기화
 
-- 에이전트에 “AGENTS.md와 wiki/index.md, wiki/log.md를 읽고 적용할 규칙과 최근 작업을 요약해줘”라고 요청해 지침 접근을 확인합니다. `ingest`, `query`, `lint`, `workout-log`, `health-query`와 연계 조사 스킬 2개를 읽을 수 있어야 합니다.
+- 에이전트에 “AGENTS.md와 wiki/index.md, wiki/log.md를 읽고 적용할 규칙과 최근 작업을 요약해줘”라고 요청해 지침 접근을 확인합니다. `ingest`, `query`, `lint`, `workout-log`, `climbing-video-analysis`, `health-query`와 연계 조사 스킬 2개를 읽을 수 있어야 합니다.
 - 저장소 내 임시 파일을 하나 작성·읽기·삭제하게 해 파일 수정 권한을 확인합니다. 기존 기록이나 원본은 이 시험에 사용하지 않습니다.
-- [클라이밍 기록](wiki/workouts/climbing/records/2026-09-20.md)의 첨부가 존재하는지 확인합니다. 영상 분석도 재현하려면 연결한 영상 도구로 실제 구간을 읽을 수 있는지 별도로 확인합니다.
+- 별도 백업한 영상을 복원한 뒤 [클라이밍 기록](wiki/workouts/climbing/records/2026-09-20.md)의 첨부가 존재하는지 확인합니다. 영상 분석도 재현하려면 연결한 영상 도구로 실제 구간을 읽을 수 있는지 별도로 확인합니다.
 - 검색을 쓸 경우 공개 주제로 검색과 원문 열람을 한 번 확인합니다. `--version` 성공은 설치 확인이며, `auth`와 실제 검색 성공까지 확인해야 검색 환경 복원이 끝납니다.
 - 필요한 보조 스크립트만 실행해 확인합니다. PDF 환경은 `python .agents/skills/literature-review/scripts/generate_pdf.py --check-deps`로 점검한 뒤 실제 출력도 확인합니다.
 - 마지막으로 `git status --short`에서 의도하지 않은 위키 변경이 없는지 확인합니다.
@@ -140,8 +141,9 @@ macOS·Linux에서는 `python3 -m venv .venv`와 `.venv/bin/python`을 사용합
 | `wiki/plans/` | 개인 목표별 실행안, 재평가 기준과 변경 이력 |
 | `wiki/monitoring/` | 프로필, 대시보드, 일별 기록과 주간 회고 |
 | `wiki/workouts/` | [운동 기록 안내](wiki/workouts/index.md), 종목별 Markdown 기록. 클라이밍은 `records/`와 사진·영상용 `assets/` 분리 |
+| `analysis-videos/` | 클라이밍 파생 분석 영상·프레임 좌표·구간별 리포트. Git 제외 대상이므로 PC 간 이동 시 별도 보관 |
 | `templates/` | 자료 요약·주제·질문·계획·일별 기록·회고 양식 |
-| `.agents/skills/` | ingest·query·lint·workout-log·health-query와 literature-review·scientific-critical-thinking 절차 |
+| `.agents/skills/` | ingest·query·lint·workout-log·climbing-video-analysis·health-query와 literature-review·scientific-critical-thinking 절차 |
 
 주제는 폴더를 계속 쪼개는 대신 태그와 링크로 연결합니다. 같은 관절이나 운동에 관한 영양·해부학·생리학 내용을 하나의 주제에서 함께 읽을 수 있습니다.
 
@@ -151,6 +153,7 @@ macOS·Linux에서는 `python3 -m venv .venv`와 `.venv/bin/python`을 사용합
 | --- | --- | --- |
 | [ingest](.agents/skills/ingest/SKILL.md) | 요약·목적 인터뷰 후 출처와 주제 통합 | “ingest로 이 책 메모를 반영해줘.” |
 | [workout-log](.agents/skills/workout-log/SKILL.md) | 종목별 운동 기록·첨부와 새 종목 형식 등록 | “오늘 크로스핏 운동을 기록해줘.” |
+| [climbing-video-analysis](.agents/skills/climbing-video-analysis/SKILL.md) | 인물 확인 후 관절·무게중심 표시 영상, 1초·중요 구간 0.1초 분석과 메모 기반 리포트 | “이 실패 영상을 분석해줘. 메모: 오른쪽으로 쏠리며 발이 떨어졌어.” |
 | [query](.agents/skills/query/SKILL.md) | 기존 위키에서 답을 찾고 분석을 다시 저장 | “query로 지금까지 읽은 자료의 공통점과 차이를 정리해줘.” |
 | [lint](.agents/skills/lint/SKILL.md) | 출처·모순·오래된 주장·링크·개인 기록 점검 | “lint로 위키를 점검해줘.” |
 | [health-query](.agents/skills/health-query/SKILL.md) | 논문 검색과 건강 근거 검증·개인화 | “health-query로 운동과 영양 근거를 조사해줘.” |

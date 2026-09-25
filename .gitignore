@@ -8,3 +8,14 @@ __pycache__/
 .venv/
 
 analysis-videos/
+
+# 클라이밍 영상은 로컬 보관; 사진과 Markdown 기록은 추적한다.
+/wiki/workouts/climbing/**/*.[mM][pP]4
+/wiki/workouts/climbing/**/*.[mM][oO][vV]
+/wiki/workouts/climbing/**/*.[mM]4[vV]
+/wiki/workouts/climbing/**/*.[aA][vV][iI]
+/wiki/workouts/climbing/**/*.[mM][kK][vV]
+/wiki/workouts/climbing/**/*.[wW][eE][bB][mM]
+/wiki/workouts/climbing/**/*.[wW][mM][vV]
+/wiki/workouts/climbing/**/*.[mM][pP][gG]
+/wiki/workouts/climbing/**/*.[mM][pP][eE][gG]
