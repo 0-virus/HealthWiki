@@ -8,6 +8,7 @@ __pycache__/
 .venv/
 
 analysis-videos/
+pathfinding-images/
 
 # 클라이밍 영상은 로컬 보관; 사진과 Markdown 기록은 추적한다.
 /wiki/workouts/climbing/**/*.[mM][pP]4

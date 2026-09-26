@@ -142,6 +142,7 @@ macOS·Linux에서는 `python3 -m venv .venv`와 `.venv/bin/python`을 사용합
 | `wiki/monitoring/` | 프로필, 대시보드, 일별 기록과 주간 회고 |
 | `wiki/workouts/` | [운동 기록 안내](wiki/workouts/index.md), 종목별 Markdown 기록. 클라이밍은 `records/`와 사진·영상용 `assets/` 분리 |
 | `analysis-videos/` | 클라이밍 파생 분석 영상·프레임 좌표·구간별 리포트. Git 제외 대상이므로 PC 간 이동 시 별도 보관 |
+| [`pathfinding-images/`](pathfinding-images/README.md) | 영상별 패스파인딩용 원본 벽·홀드 후보 표시·스타트 이미지 3장과 [전체 이미지 목록](pathfinding-images/index.html) |
 | `templates/` | 자료 요약·주제·질문·계획·일별 기록·회고 양식 |
 | `.agents/skills/` | ingest·query·lint·workout-log·climbing-video-analysis·health-query와 literature-review·scientific-critical-thinking 절차 |
 
